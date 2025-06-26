@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="EasyControl, an innovative framework based on Diffusion Transformer, achieves efficient and flexible multi-condition controlled image generation through a lightweight condition injection module, position-aware training paradigm, and causal attention mechanism.">
+  <meta name="keywords" content="Easycontrol, Zero-shot Multi-condition Generalization, Identity-Preserving, DiT">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EasyControl: Adding Efficient and Flexible Control for Diffusion Transformer</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">EasyControl: Adding Efficient and Flexible Control for Diffusion Transformer</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://xiaojiu-z.github.io/YuxuanZhang.github.io/">Yuxuan Zhang</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://github.com/Reynoldyy">Yirui Yuan</a><sup>2,1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com.hk/citations?user=L2YS0jgAAAAJ">Yiren Song</a><sup>3,1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://haofanwang.github.io/">Haofan Wang</a><sup>4</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=SmL7oMQAAAAJ&hl=en">Jiaming Liu</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Tiamat AI, </span>
+            <span class="author-block"><sup>2</sup>ShanghaiTech University</span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>3</sup>National University of Singapore, </span>
+            <span class="author-block"><sup>4</sup>Liblib AI</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2503.07027"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2503.07027"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/Xiaojiu-z/EasyControl"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Model Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/Xiaojiu-Z/EasyControl/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-hdd"></i>
+                  </span>
+                  <span>Model</span>
+                  </a>
+              </span>
+              <!-- Demo Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/spaces/jamesliu1217/EasyControl/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-smile"></i>
+                  </span>
+                  <span>Demo</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/teaser.jpg" alt="EasyControl" width="100%"></img>
+      <h2 class="subtitle has-text-centered">
+        EasyControl, an innovative framework based on Diffusion Transformer, achieves efficient and flexible multi-condition controlled image generation through a lightweight condition injection module, position-aware training paradigm, and causal attention mechanism.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="section"> -->
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recent advancements in Unet-based diffusion models, such as ControlNet and IP-Adapter, have introduced effective spatial and subject control mechanisms. 
+            However, the DiT (Diffusion Transformer) architecture still struggles with efficient and flexible control. 
+            To tackle this issue, we propose <b>EasyControl</b>, a novel framework designed to unify condition-guided diffusion transformers with high efficiency and flexibility. 
+            Our framework is built on three key innovations. 
+          </p>
+          <p>
+            First, we introduce a lightweight <b>Condition Injection LoRA Module</b>. This module processes conditional signals in isolation, acting as a plug-and-play solution. 
+            It avoids modifying the base model weights, ensuring compatibility with customized models and enabling the flexible injection of diverse conditions. 
+            Notably, this module also supports harmonious and robust zero-shot multi-condition generalization, even when trained only on single-condition data. 
+          </p>
+          <p>
+            Second, we propose a <b>Position-Aware Training Paradigm</b>. This approach standardizes input conditions to fixed resolutions, allowing the generation of images with arbitrary aspect ratios and flexible resolutions. 
+            At the same time, it optimizes computational efficiency, making the framework more practical for real-world applications. 
+          </p>
+          <p>
+            Third, we develop a <b>Causal Attention Mechanism</b> combined with the <b>KV Cache</b> technique, adapted for conditional generation tasks. 
+            This innovation significantly reduces the latency of image synthesis, improving the overall efficiency of the framework. 
+          </p>
+          <p>
+            Through extensive experiments, we demonstrate that EasyControl achieves exceptional performance across various application scenarios. 
+            These innovations collectively make our framework highly efficient, flexible, and suitable for a wide range of tasks.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+<!-- </section> -->
+
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Method</h2>
+      <div class="content has-text-justified">
+        <p>
+          The illustration of EasyControl framework. The condition signal is injected into the Diffusion Transformer (DiT) through a newly
+          introduced condition branch, which encodes the condition tokens in conjunction with a lightweight, plug-and-play Condition Injection
+          LoRA Module.
+        </p>
+      </div>
+      <div class="container is-max-desktop">
+        <img src="./static/images/method.jpg" alt="EasyControl" width="100%"></img>
+      </div>
+      <div class="content has-text-justified">
+        <p>
+          During training, each individual condition is trained separately, where condition images are resized to a lower resolution
+          and trained using our proposed Position-Aware Training Paradigm. This approach enables efficient and flexible resolution training. The
+          framework incorporates a Causal Attention mechanism, which enables the implementation of a Key-Value (KV) Cache to substantially
+          improve inference efficiency. Furthermore, our design facilitates the seamless integration of multiple Condition Injection LoRA Modules,
+          enabling robust and harmonious multi-condition generation.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+      
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Condition Injection LoRA Module</h2>
+      <div class="container is-max-desktop">
+        <img src="./static/images/com1.jpg" alt="single condition control" width="100%"></img>
+      </div>
+      <div class="content has-text-centered">
+        <p>
+          Visual comparison between different methods in single condition control. </br>
+          Figure (a) shows the results of each method under different control conditions and Figure (b) shows the adaptation of each method with different Style LoRAs under control.
+        </p>
+      </div>
+      
+      <div class="container is-max-desktop">
+        <img src="./static/images/com2.jpg" alt="single condition control" width="100%"></img>
+      </div>
+      <div class="content has-text-centered">
+        <p>
+          Visual comparison of different methods under multi-condition control.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Identity-Preserving Control</h2>
+      <div class="container is-max-desktop">
+        <img src="./static/images/Sup Fo.jpg" alt="single condition control" width="100%"></img>
+      </div>
+      <div class="content has-text-centered">
+        <p>
+          Visual comparison with Identity customization methods under multi-condition generation setting.
+        </p>
+      </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Subject Control Generation</h2>
+      <div class="container is-max-desktop">
+        <img src="./static/images/Sup Subject.jpg" alt="single condition control" width="100%"></img>
+      </div>
+      <div class="content has-text-centered">
+        <p>
+          Visualization of subject control generation.
+        </p>
+      </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Spatial Control Generation</h2>
+      <div class="container is-max-desktop">
+        <img src="./static/images/Sup Spatial.jpg" alt="single condition control" width="100%"></img>
+      </div>
+      <div class="content has-text-centered">
+        <p>
+          Visualization of spatial control generation.
+        </p>
+      </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Flexible Resolution Generation</h2>
+      <div class="container is-max-desktop">
+        <img src="./static/images/sup_res.jpg" alt="single condition control" width="100%"></img>
+      </div>
+      <div class="content has-text-centered">
+        <p>
+          Visual comparison with baseline methods under different resolution generation settings.
+        </p>
+      </div>
+  </div>
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{zhang2025easycontroladdingefficientflexible,
+      title={EasyControl: Adding Efficient and Flexible Control for Diffusion Transformer}, 
+      author={Yuxuan Zhang and Yirui Yuan and Yiren Song and Haofan Wang and Jiaming Liu},
+      year={2025},
+      eprint={2503.07027},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2503.07027}, 
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            The website template is borrowed from <a
+              href="https://github.com/nerfies/nerfies.github.io">nerfies.github.io</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
