@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="EasyControl, an innovative framework based on Diffusion Transformer, achieves efficient and flexible multi-condition controlled image generation through a lightweight condition injection module, position-aware training paradigm, and causal attention mechanism.">
-  <meta name="keywords" content="Easycontrol, Zero-shot Multi-condition Generalization, Identity-Preserving, DiT">
+        content="WordCon: Word-level Typography Control in Scene Text Rendering - A novel framework for precise word-level typography control in scene text rendering through advanced typography modeling and control mechanisms.">
+  <meta name="keywords" content="WordCon, Word-level Typography Control, Scene Text Rendering, Text-to-Image, Typography">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EasyControl: Adding Efficient and Flexible Control for Diffusion Transformer</title>
+  <title>WordCon: Word-level Typography Control in Scene Text Rendering</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -41,47 +41,6 @@
   <script src="./static/js/index.js"></script>
 </head>
 <body>
-
-<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</nav> -->
-
 
 <section class="hero">
   <div class="hero-body">
@@ -121,9 +80,9 @@
                 <a href="https://wendashi.github.io/WordCon-Page/"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                      <i class="ai ai-arxiv"></i>
+                      <i class="fas fa-file-pdf"></i>
                   </span>
-                  <span>arXiv</span>
+                  <span>Paper</span>
                 </a>
               </span>
               <!-- Code Link. -->
@@ -146,18 +105,7 @@
                   <span>Model</span>
                   </a>
               </span>
-              <!-- Demo Link. -->
-              <!-- <span class="link-block">
-                <a href="https://huggingface.co/spaces/jamesliu1217/EasyControl/"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-smile"></i>
-                  </span>
-                  <span>Demo</span>
-                  </a>
-              </span> -->
             </div>
-
           </div>
         </div>
       </div>
@@ -168,99 +116,95 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-      <img src="./static/images/teaser.pdf" alt="EasyControl" width="100%"></img>
+      <img src="./static/images/teaser.jpg" alt="WordCon Teaser" width="100%"></img>
       <h2 class="subtitle has-text-centered">
-        EasyControl, an innovative framework based on Diffusion Transformer, achieves efficient and flexible multi-condition controlled image generation through a lightweight condition injection module, position-aware training paradigm, and causal attention mechanism.
+        (a) Scene text rendering results with word-level typography control from WordCon. The controlled content of each image is 'Let', 'us', 'control', 'the', 'target word', and 'Just'. The typographic attributes are 'bold', 'underline', and 'italic' from top to bottom. (b) WordCon is compatible with artistic LoRAs, Flux-fill, and image conditioned pipelines, which makes it suitable for various tasks, including artistic text rendering (first row), text editing (second row), and image conditioned text rendering (third row). (c) shows more visual results of diverse applications.
       </h2>
     </div>
   </div>
 </section>
 
-<!-- <section class="section"> -->
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            Recent advancements in Unet-based diffusion models, such as ControlNet and IP-Adapter, have introduced effective spatial and subject control mechanisms. 
-            However, the DiT (Diffusion Transformer) architecture still struggles with efficient and flexible control. 
-            To tackle this issue, we propose <b>EasyControl</b>, a novel framework designed to unify condition-guided diffusion transformers with high efficiency and flexibility. 
-            Our framework is built on three key innovations. 
-          </p>
-          <p>
-            First, we introduce a lightweight <b>Condition Injection LoRA Module</b>. This module processes conditional signals in isolation, acting as a plug-and-play solution. 
-            It avoids modifying the base model weights, ensuring compatibility with customized models and enabling the flexible injection of diverse conditions. 
-            Notably, this module also supports harmonious and robust zero-shot multi-condition generalization, even when trained only on single-condition data. 
-          </p>
-          <p>
-            Second, we propose a <b>Position-Aware Training Paradigm</b>. This approach standardizes input conditions to fixed resolutions, allowing the generation of images with arbitrary aspect ratios and flexible resolutions. 
-            At the same time, it optimizes computational efficiency, making the framework more practical for real-world applications. 
-          </p>
-          <p>
-            Third, we develop a <b>Causal Attention Mechanism</b> combined with the <b>KV Cache</b> technique, adapted for conditional generation tasks. 
-            This innovation significantly reduces the latency of image synthesis, improving the overall efficiency of the framework. 
-          </p>
-          <p>
-            Through extensive experiments, we demonstrate that EasyControl achieves exceptional performance across various application scenarios. 
-            These innovations collectively make our framework highly efficient, flexible, and suitable for a wide range of tasks.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Abstract. -->
-  </div>
-<!-- </section> -->
-
-<section class="section">
+<div class="container is-max-desktop">
+  <!-- Abstract. -->
   <div class="columns is-centered has-text-centered">
     <div class="column is-four-fifths">
-      <h2 class="title is-3">Method</h2>
+      <h2 class="title is-3">Abstract</h2>
       <div class="content has-text-justified">
         <p>
-          The illustration of EasyControl framework. The condition signal is injected into the Diffusion Transformer (DiT) through a newly
-          introduced condition branch, which encodes the condition tokens in conjunction with a lightweight, plug-and-play Condition Injection
-          LoRA Module.
+          Recent advancements in text-to-image (T2I) models have demonstrated remarkable capabilities in generating high-quality images from text descriptions. 
+          However, these models often struggle with precise word-level typography control in scene text rendering, particularly when applying specific typographic attributes 
+          (such as bold, italic, underline) to individual words within a text prompt.
+        </p>
+        <p>
+          In this paper, we identify and address the <b>word-level misalignment</b> problem in text rendering, where the attention maps of words for text rendering 
+          are more likely to be misaligned compared to words referring to common objects. To tackle this challenge, we propose <b>WordCon</b>, a novel framework 
+          that leverages text-image alignment and hybrid parameter-efficient fine-tuning (PEFT) methods.
+        </p>
+        <p>
+          Our approach employs a text-image alignment framework that leverages cross-modal correspondence between textual queries and image regions provided by grounding models. 
+          Additionally, we introduce a hybrid PEFT method that reparameterizes selective key parameters with two losses: a masked loss at the latent level to guide the model 
+          to concentrate on learning the text part, and a joint-attention loss that provides feature-level supervision to promote disentanglement between different words.
+        </p>
+        <p>
+          Through extensive experiments, we demonstrate that WordCon achieves superior word-level typography control while maintaining compatibility with various existing pipelines, 
+          including artistic LoRAs, Flux-fill for text editing, and image-conditioned generation frameworks.
         </p>
       </div>
+    </div>
+  </div>
+  <!--/ Abstract. -->
+</div>
+
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Problem Statement</h2>
       <div class="container is-max-desktop">
-        <img src="./static/images/method.jpg" alt="EasyControl" width="100%"></img>
+        <img src="./static/images/problem.jpg" alt="Problem Statement" width="100%"></img>
+      </div>
+      <div class="content has-text-centered">
+        <p>
+          The challenge of text rendering. The SOTA T2I models excel at general text rendering and controllability on common objects, 
+          however, they struggle with precise word-level typography control.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Word-level Misalignment</h2>
+      <div class="container is-max-desktop">
+        <img src="./static/images/intro_attn.jpg" alt="Word-level Misalignment" width="100%"></img>
+      </div>
+      <div class="content has-text-centered">
+        <p>
+          The green regions are the attention maps of each word in the prompt. Compared to words that refer to common objects 
+          (e.g., 'Girl', 'Book', 'Dog', 'Boy', 'T-shirt', 'Cap'), attention map of words for text rendering is more likely to be misaligned. 
+          In this paper, we refer to it as <b>word-level misalignment</b>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Method Overview</h2>
+      <div class="container is-max-desktop">
+        <img src="./static/images/method.jpg" alt="Method Overview" width="100%"></img>
       </div>
       <div class="content has-text-justified">
         <p>
-          During training, each individual condition is trained separately, where condition images are resized to a lower resolution
-          and trained using our proposed Position-Aware Training Paradigm. This approach enables efficient and flexible resolution training. The
-          framework incorporates a Causal Attention mechanism, which enables the implementation of a Key-Value (KV) Cache to substantially
-          improve inference efficiency. Furthermore, our design facilitates the seamless integration of multiple Condition Injection LoRA Modules,
-          enabling robust and harmonious multi-condition generation.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="columns is-centered has-text-centered">
-      
-    <div class="column is-four-fifths">
-      <h2 class="title is-3">Condition Injection LoRA Module</h2>
-      <div class="container is-max-desktop">
-        <img src="./static/images/com1.jpg" alt="single condition control" width="100%"></img>
-      </div>
-      <div class="content has-text-centered">
-        <p>
-          Visual comparison between different methods in single condition control. </br>
-          Figure (a) shows the results of each method under different control conditions and Figure (b) shows the adaptation of each method with different Style LoRAs under control.
-        </p>
-      </div>
-      
-      <div class="container is-max-desktop">
-        <img src="./static/images/com2.jpg" alt="single condition control" width="100%"></img>
-      </div>
-      <div class="content has-text-centered">
-        <p>
-          Visual comparison of different methods under multi-condition control.
+          <b>Method overview:</b> (a) To mitigate word-level misalignment, we employ a text-image alignment framework that leverages 
+          the cross-modal correspondence between textual query and image regions provided by grounding models. In addition, (b) to conserve 
+          computational resources and enhance flexibility, we introduce WordCon, a hybrid PEFT method that reparameterizes selective key 
+          parameters with two losses. The masked loss at the latent level is applied to guide the model to concentrate on learning the text part, 
+          and the joint-attention loss provides feature-level supervision to promote disentanglement between different words. (c) The plug-and-play 
+          inference pipeline with other modules shows the wide applicability of our method.
         </p>
       </div>
     </div>
@@ -270,80 +214,120 @@
 <section class="section">
   <div class="columns is-centered has-text-centered">
     <div class="column is-four-fifths">
-      <h2 class="title is-3">Identity-Preserving Control</h2>
+      <h2 class="title is-3">Qualitative Comparison</h2>
       <div class="container is-max-desktop">
-        <img src="./static/images/Sup Fo.jpg" alt="single condition control" width="100%"></img>
+        <img src="./static/images/compare.jpg" alt="Qualitative Comparison" width="100%"></img>
       </div>
       <div class="content has-text-centered">
         <p>
-          Visual comparison with Identity customization methods under multi-condition generation setting.
+          Qualitative comparison with state-of-the-art models, including both widely-used open-source and proprietary commercial models. 
+          The first three rows of the comparison illustrate cases where typography control is applied to a single word, while the last three rows 
+          demonstrate control over multiple words. <span style="color: red;">Red boxes</span> indicate instances where no typographic attribute was applied to the target word. 
+          <span style="color: #00DDFF;">Blue boxes</span> denote cases where the correct typographic attribute was applied to an incorrect word. 
+          <span style="color: #00FF00;">Green boxes</span> highlight instances where an incorrect typographic attribute was applied to the target word.
         </p>
       </div>
+    </div>
   </div>
 </section>
 
 <section class="section">
   <div class="columns is-centered has-text-centered">
     <div class="column is-four-fifths">
-      <h2 class="title is-3">Subject Control Generation</h2>
+      <h2 class="title is-3">More Results</h2>
       <div class="container is-max-desktop">
-        <img src="./static/images/Sup Subject.jpg" alt="single condition control" width="100%"></img>
+        <img src="./static/images/more_results.jpg" alt="More Results" width="100%"></img>
       </div>
       <div class="content has-text-centered">
         <p>
-          Visualization of subject control generation.
+          More results of our method. The cases in the first, third, and fifth rows where typography control is applied to a single word, 
+          while the other three rows demonstrate control over multiple words. The results show that our method can achieve word-level typography 
+          control while also enabling font control.
         </p>
       </div>
+    </div>
   </div>
 </section>
 
 <section class="section">
   <div class="columns is-centered has-text-centered">
     <div class="column is-four-fifths">
-      <h2 class="title is-3">Spatial Control Generation</h2>
+      <h2 class="title is-3">Applications</h2>
       <div class="container is-max-desktop">
-        <img src="./static/images/Sup Spatial.jpg" alt="single condition control" width="100%"></img>
+        <img src="./static/images/app_1.jpg" alt="Applications" width="100%"></img>
       </div>
       <div class="content has-text-centered">
         <p>
-          Visualization of spatial control generation.
+          Visual results of various applications.
         </p>
       </div>
+    </div>
   </div>
 </section>
 
 <section class="section">
   <div class="columns is-centered has-text-centered">
     <div class="column is-four-fifths">
-      <h2 class="title is-3">Flexible Resolution Generation</h2>
+      <h2 class="title is-3">Font Selection</h2>
       <div class="container is-max-desktop">
-        <img src="./static/images/sup_res.jpg" alt="single condition control" width="100%"></img>
+        <img src="./static/images/font_select.jpg" alt="Font Selection" width="100%"></img>
       </div>
       <div class="content has-text-centered">
         <p>
-          Visual comparison with baseline methods under different resolution generation settings.
+          Visual results of font selection. WordCon enables font selection in scene text rendering (first row). 
+          This capability is compatible with artistic LoRAs (second row) and image-conditioned pipelines (third row).
         </p>
       </div>
+    </div>
   </div>
 </section>
 
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">More Qualitative Results</h2>
+      <div class="container is-max-desktop">
+        <img src="./static/images/more_qual.jpg" alt="More Qualitative Results" width="100%"></img>
+      </div>
+      <div class="content has-text-centered">
+        <p>
+          Additional qualitative results demonstrating the effectiveness of WordCon in various scenarios.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section class="section">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Depth-based Control</h2>
+      <div class="container is-max-desktop">
+        <img src="./static/images/depth_based.jpg" alt="Depth-based Control" width="100%"></img>
+      </div>
+      <div class="content has-text-centered">
+        <p>
+          Depth-based control results showing the integration of WordCon with image-conditioned pipelines.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@misc{zhang2025easycontroladdingefficientflexible,
-      title={EasyControl: Adding Efficient and Flexible Control for Diffusion Transformer}, 
-      author={Yuxuan Zhang and Yirui Yuan and Yiren Song and Haofan Wang and Jiaming Liu},
-      year={2025},
-      eprint={2503.07027},
+    <pre><code>@misc{shi2024wordcon,
+      title={WordCon: Word-level Typography Control in Scene Text Rendering}, 
+      author={Wenda Shi and Yiren Song and Zihan Rao and Dengming Zhang and Jiaming Liu and Xingxing Zou},
+      year={2024},
+      eprint={},
       archivePrefix={arXiv},
       primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2503.07027}, 
+      url={}, 
 }</code></pre>
   </div>
 </section>
-
 
 <footer class="footer">
   <div class="container">
